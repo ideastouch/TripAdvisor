@@ -44,7 +44,7 @@
 		C9260E951954EBC100C25F88 /* TrAdImageCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260E941954EBC100C25F88 /* TrAdImageCollectionViewDelegate.m */; };
 		C9260E981954F96000C25F88 /* TrAdImageCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260E971954F96000C25F88 /* TrAdImageCollectionView.m */; };
 		C9260E9B195625F500C25F88 /* TrAdImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260E9A195625F500C25F88 /* TrAdImageCollectionViewCell.m */; };
-		C9260E9E19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260E9D19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.m */; };
+		C9260E9E19563E4D00C25F88 /* TrAdCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260E9D19563E4D00C25F88 /* TrAdCollectionViewLayout.m */; };
 		C9260EA8195797D800C25F88 /* TrAdPinterestPictures.m in Sources */ = {isa = PBXBuildFile; fileRef = C9260EA7195797D800C25F88 /* TrAdPinterestPictures.m */; };
 /* End PBXBuildFile section */
 
@@ -105,8 +105,8 @@
 		C9260E971954F96000C25F88 /* TrAdImageCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrAdImageCollectionView.m; sourceTree = "<group>"; };
 		C9260E99195625F500C25F88 /* TrAdImageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrAdImageCollectionViewCell.h; sourceTree = "<group>"; };
 		C9260E9A195625F500C25F88 /* TrAdImageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrAdImageCollectionViewCell.m; sourceTree = "<group>"; };
-		C9260E9C19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrAdCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		C9260E9D19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrAdCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		C9260E9C19563E4D00C25F88 /* TrAdCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrAdCollectionViewLayout.h; sourceTree = "<group>"; };
+		C9260E9D19563E4D00C25F88 /* TrAdCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrAdCollectionViewLayout.m; sourceTree = "<group>"; };
 		C9260EA6195797D800C25F88 /* TrAdPinterestPictures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrAdPinterestPictures.h; sourceTree = "<group>"; };
 		C9260EA7195797D800C25F88 /* TrAdPinterestPictures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrAdPinterestPictures.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -258,8 +258,8 @@
 				C9260E461954CB1200C25F88 /* TrAdViewController.m */,
 				C9260E961954F96000C25F88 /* TrAdImageCollectionView.h */,
 				C9260E971954F96000C25F88 /* TrAdImageCollectionView.m */,
-				C9260E9C19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.h */,
-				C9260E9D19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.m */,
+				C9260E9C19563E4D00C25F88 /* TrAdCollectionViewLayout.h */,
+				C9260E9D19563E4D00C25F88 /* TrAdCollectionViewLayout.m */,
 				C9260E99195625F500C25F88 /* TrAdImageCollectionViewCell.h */,
 				C9260E9A195625F500C25F88 /* TrAdImageCollectionViewCell.m */,
 				C9260E931954EBC100C25F88 /* TrAdImageCollectionViewDelegate.h */,
@@ -406,7 +406,7 @@
 			files = (
 				C9260EA8195797D800C25F88 /* TrAdPinterestPictures.m in Sources */,
 				C9260E9B195625F500C25F88 /* TrAdImageCollectionViewCell.m in Sources */,
-				C9260E9E19563E4D00C25F88 /* TrAdCollectionViewFlowLayout.m in Sources */,
+				C9260E9E19563E4D00C25F88 /* TrAdCollectionViewLayout.m in Sources */,
 				C9260E951954EBC100C25F88 /* TrAdImageCollectionViewDelegate.m in Sources */,
 				C9260E981954F96000C25F88 /* TrAdImageCollectionView.m in Sources */,
 				C9260E471954CB1200C25F88 /* TrAdViewController.m in Sources */,
@@ -621,6 +621,7 @@
 				C9260E611954CB1200C25F88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C9260E621954CB1200C25F88 /* Build configuration list for PBXNativeTarget "PinterestTests" */ = {
 			isa = XCConfigurationList;
@@ -629,6 +630,7 @@
 				C9260E641954CB1200C25F88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <collectionViewLayout key="collectionViewLayout" id="Jde-E0-Ncb" customClass="TrAdCollectionViewFlowLayout"/>
+                                <collectionViewLayout key="collectionViewLayout" id="Jde-E0-Ncb" customClass="TrAdCollectionViewLayout"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TrAdViewControllerCellIdntifier" id="tGO-9C-I4i" customClass="TrAdImageCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="256" height="256"/>

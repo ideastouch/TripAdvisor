@@ -65,13 +65,30 @@ NSInteger const picturesCount = 18;
     return [_imagesGroups objectAtIndex:idx];
 }
 
+- (void)uncollapaseAtPosition:(NSUInteger)idx success:(IdBoolBlock)succes
+{
+    NSArray * array = [self imagesAtIndex:idx];
+    __block NSMutableArray  * uncollapsedImages = [NSMutableArray arrayWithCapacity:[array count]];
+    BOOL error = NO;
+    if ([array count] > 1) {
+        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [uncollapsedImages addObject:@[obj]];
+        }];
+        [_imagesGroups replaceObjectsInRange:NSMakeRange(idx, 1) withObjectsFromArray:uncollapsedImages];
+    }
+    else {
+        error = YES;
+    }
+    succes(uncollapsedImages, error);
+}
+
 - (void)collapaseFrom:(NSUInteger)idxFrom to:(NSUInteger)idxTo success:(IdBoolBlock)succes
 {
     NSUInteger from = MIN(idxFrom, idxTo);
     NSUInteger to = MAX(idxFrom, idxTo);
     __block NSMutableArray * collapsed = [NSMutableArray array];
     __block BOOL error = NO;
-    NSRange subarrayRange = NSMakeRange(from, to - from);
+    NSRange subarrayRange = NSMakeRange(from, to - from + 1);
     NSArray * subarray = [_imagesGroups subarrayWithRange:subarrayRange];
     [subarray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         if ([obj count] > 1) {

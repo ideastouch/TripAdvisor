@@ -33,9 +33,9 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
     [self setImageCollectionViewDelegate:[[TrAdImageCollectionViewDelegate alloc] init]];
     [_collectionView setDelegate:_imageCollectionViewDelegate];
     
-//    [self.collectionView registerClass:[TrAdImageCollectionViewCell class] forCellWithReuseIdentifier:TrAdViewControllerCellIdntifier];
     [self setImagesCollectionViewDataSource:[[TrAdImagesCollectionViewDataSource alloc] initReuseIdentifier:TrAdViewControllerCellIdntifier]];
     [_collectionView setDataSource:_imagesCollectionViewDataSource];
+    
     [_collectionView reloadData];
 }
 
@@ -49,7 +49,8 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
 {
     if (   gestureRecognizer.state == UIGestureRecognizerStateBegan
         && [gestureRecognizer numberOfTouches] == 2) {
-        id (^getIndexPath)(NSInteger) = ^id(NSInteger idx){
+        
+        id (^getIndexPath)(NSInteger) = ^id(NSInteger idx) {
             CGPoint location = [gestureRecognizer locationOfTouch:idx inView:[gestureRecognizer view]];
             CGRect rect = CGRectMake(location.x - 1, location.y - 1, location.x + 1, location.y + 1);
             NSArray * layoutAttributes = [[_collectionView collectionViewLayout] layoutAttributesForElementsInRect:rect];
@@ -63,29 +64,50 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
             
             return indexPath;
         };
-        NSIndexPath * indexPath0 = getIndexPath(0);
-        NSIndexPath * indexPath1 = getIndexPath(1);
+        NSUInteger idxFrom = [getIndexPath(0) indexAtPosition:1];
+        NSUInteger idxTo   = [getIndexPath(1) indexAtPosition:1];
         
-        NSLog(@"%@ , %@", [indexPath0 description], [indexPath1 description]);
-        [[TrAdPinterestPictures sharedInstance] collapaseFrom:[indexPath0 indexAtPosition:1]
-                                                           to:[indexPath1 indexAtPosition:1]
-                                                      success:^(id<NSObject> collapsedImages, BOOL fail) {
-                                                          if (fail) {
-                                                              [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
-                                                                                         message:@"Collapsed acction fail."
-                                                                                        delegate:nil
-                                                                               cancelButtonTitle:@"OK"
-                                                                                otherButtonTitles:nil] show];
-                                                          }
-                                                          else {
-                                                              [_collectionView reloadData];
-                                                              [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
-                                                                                          message:@"Collapsed acction succeded."
-                                                                                         delegate:nil
-                                                                                cancelButtonTitle:@"OK"
-                                                                                otherButtonTitles:nil] show];
-                                                          }
-                                                      }];
+        if (idxFrom == idxTo) {
+            [[TrAdPinterestPictures sharedInstance] uncollapaseAtPosition:idxFrom
+                                                                  success:^(id<NSObject> uncollapsedImages, BOOL fail) {
+                                                                      if (fail) {
+                                                                          [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
+                                                                                                      message:@"Uncollapsed acction fail."
+                                                                                                     delegate:nil
+                                                                                            cancelButtonTitle:@"OK"
+                                                                                            otherButtonTitles:nil] show];
+                                                                      }
+                                                                      else {
+                                                                          [_collectionView reloadData];
+                                                                          [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
+                                                                                                      message:@"Uncollapsed acction succeded."
+                                                                                                     delegate:nil
+                                                                                            cancelButtonTitle:@"OK"
+                                                                                            otherButtonTitles:nil] show];
+                                                                      }
+                                                                  }];
+        }
+        else {
+            [[TrAdPinterestPictures sharedInstance] collapaseFrom:idxFrom
+                                                               to:idxTo
+                                                          success:^(id<NSObject> collapsedImages, BOOL fail) {
+                                                              if (fail) {
+                                                                  [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
+                                                                                              message:@"Collapsed acction fail."
+                                                                                             delegate:nil
+                                                                                    cancelButtonTitle:@"OK"
+                                                                                    otherButtonTitles:nil] show];
+                                                              }
+                                                              else {
+                                                                  [_collectionView reloadData];
+                                                                  [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
+                                                                                              message:@"Collapsed acction succeded."
+                                                                                             delegate:nil
+                                                                                    cancelButtonTitle:@"OK"
+                                                                                    otherButtonTitles:nil] show];
+                                                              }
+                                                          }];
+        }
     }
 }
 @end

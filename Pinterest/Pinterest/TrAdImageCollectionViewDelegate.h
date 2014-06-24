@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface TrAdImageCollectionViewDelegate : NSObject <UICollectionViewDelegateFlowLayout> //conform to protocol UICollectionViewDelegate
+@interface TrAdImageCollectionViewDelegate : NSObject <UICollectionViewDelegate>
 
 @end

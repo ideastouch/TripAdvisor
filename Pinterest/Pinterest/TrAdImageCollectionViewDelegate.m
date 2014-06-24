@@ -46,19 +46,4 @@
 - (UICollectionViewTransitionLayout *)collectionView:(UICollectionView *)collectionView transitionLayoutForOldLayout:(UICollectionViewLayout *)fromLayout newLayout:(UICollectionViewLayout *)toLayout;
 */
 
-#pragma mark UICollectionViewDelegateFlowLayout protocol
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray * images = [[TrAdPinterestPictures sharedInstance] imagesAtIndex:[indexPath indexAtPosition:1]];
-    UIImage * image = [images lastObject];
-    if ([images count] > 1) {
-        image = [[TrAdPinterestPictures sharedInstance] tileFashionImage:images];
-    }
-    
-    CGSize size = [TrAdImageCollectionView normalizedSize:image];
-    
-    return size;
-}
-
-
 @end

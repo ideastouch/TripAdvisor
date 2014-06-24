@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrAdCollectionViewFlowLayout : UICollectionViewFlowLayout
+@interface TrAdCollectionViewLayout : UICollectionViewLayout
 
 @end
