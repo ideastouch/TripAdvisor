@@ -8,9 +8,11 @@
 
 #import "TrAdCollectionViewFlowLayout.h"
 #import "TrAdImageCollectionView.h"
+#import "TrAdPinterestPictures.h"
 
 @interface TrAdCollectionViewFlowLayout ()
 
+//@property CGSize contentSize;
 @property (nonatomic, strong) NSMutableDictionary * collectionViewLayoutAttributes;
 
 @end
@@ -22,6 +24,7 @@
 {
     self = [super init];
     if (self) {
+//        self.contentSize = CGSizeZero;
         self.minimumLineSpacing = [TrAdImageCollectionView minimumSpacing];
         self.minimumInteritemSpacing = [TrAdImageCollectionView minimumSpacing];
         self.collectionViewLayoutAttributes = [NSMutableDictionary dictionary];
@@ -33,6 +36,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+//        self.contentSize = CGSizeZero;
         self.minimumLineSpacing = [TrAdImageCollectionView minimumSpacing];
         self.minimumInteritemSpacing = [TrAdImageCollectionView minimumSpacing];
         self.collectionViewLayoutAttributes = [NSMutableDictionary dictionary];
@@ -45,19 +49,51 @@
     return CGPointMake(frame.origin.x - 20, frame.origin.y - 30);
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+
+
+/*
+- (void)updateCollectionViewContentSize
 {
-    UICollectionViewLayoutAttributes * collectionViewLayoutAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
     
-    CGRect frame = [collectionViewLayoutAttributes frame];
-    CGPoint origin = [self originItemAtIndexPath:indexPath withFrame:frame];
-    frame.origin.x = origin.x;
-    frame.origin.y = origin.y;
-    [collectionViewLayoutAttributes setFrame:frame];
+    CGSize (^sizeItem)(NSUInteger) = ^(NSUInteger idx){
+        NSArray * images = [[TrAdPinterestPictures sharedInstance] imagesAtIndex:idx];
+        UIImage * image = [images lastObject];
+        if ([images count] > 1) {
+            image = [[TrAdPinterestPictures sharedInstance] tileFashionImage:images];
+        }
+        return [TrAdImageCollectionView normalizedSize:image];
+    };
     
-    return collectionViewLayoutAttributes;
+    NSUInteger count = [[[self collectionView] dataSource] collectionView:[self collectionView]
+                                                   numberOfItemsInSection:0];
+    for (int idx = 0; idx < count; idx++) {
+        CGSize size = sizeItem(count);
+        
+    }
 }
 
+- (void)prepareLayout
+{
+    [super prepareLayout];
+    
+}
+
+- (CGSize)collectionViewContentSize
+{
+//    return CGSizeMake(768, 1500);
+    return _contentSize;
+}
+
+- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    return nil;
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+*/
 - (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
 {
     rect.size.height *= 1.5;

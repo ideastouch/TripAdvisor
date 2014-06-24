@@ -11,6 +11,7 @@
 #import "TrAdImageCollectionViewCell.h"
 #import "TrAdImageCollectionViewDelegate.h"
 #import "TrAdImagesCollectionViewDataSource.h"
+#import "TrAdPinterestPictures.h"
 
 NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdntifier";
 
@@ -46,16 +47,45 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
 
 - (IBAction)handleGesture:(UIGestureRecognizer *)gestureRecognizer
 {
-    assert([gestureRecognizer numberOfTouches] == 2 && @"Touches must be 2");
-    
-    id (^getIndexPath)(NSInteger) = ^id(NSInteger idx){
-        CGPoint location = [gestureRecognizer locationOfTouch:idx inView:[gestureRecognizer view]];
-        CGRect rect = CGRectMake(location.x - 1, location.y - 1, location.x + 1, location.y + 1);
-        NSArray * layoutAttributes = [[_collectionView collectionViewLayout] layoutAttributesForElementsInRect:rect];
-        assert([layoutAttributes count] == 1 && @"Can not be more/less than one layout");
-        return[[layoutAttributes lastObject] indexPath];
-    };
-    NSIndexPath * indexPath0 = getIndexPath(0);
-    NSIndexPath * indexPath1 = getIndexPath(1);
+    if (   gestureRecognizer.state == UIGestureRecognizerStateBegan
+        && [gestureRecognizer numberOfTouches] == 2) {
+        id (^getIndexPath)(NSInteger) = ^id(NSInteger idx){
+            CGPoint location = [gestureRecognizer locationOfTouch:idx inView:[gestureRecognizer view]];
+            CGRect rect = CGRectMake(location.x - 1, location.y - 1, location.x + 1, location.y + 1);
+            NSArray * layoutAttributes = [[_collectionView collectionViewLayout] layoutAttributesForElementsInRect:rect];
+            __block NSIndexPath * indexPath = nil;
+            [layoutAttributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                if (CGRectContainsPoint(rect, location)) {
+                    indexPath = [[layoutAttributes objectAtIndex:idx] indexPath];
+                    *stop = YES;
+                }
+            }];
+            
+            return indexPath;
+        };
+        NSIndexPath * indexPath0 = getIndexPath(0);
+        NSIndexPath * indexPath1 = getIndexPath(1);
+        
+        NSLog(@"%@ , %@", [indexPath0 description], [indexPath1 description]);
+        [[TrAdPinterestPictures sharedInstance] collapaseFrom:[indexPath0 indexAtPosition:1]
+                                                           to:[indexPath1 indexAtPosition:1]
+                                                      success:^(id<NSObject> collapsedImages, BOOL fail) {
+                                                          if (fail) {
+                                                              [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
+                                                                                         message:@"Collapsed acction fail."
+                                                                                        delegate:nil
+                                                                               cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil] show];
+                                                          }
+                                                          else {
+                                                              [_collectionView reloadData];
+                                                              [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
+                                                                                          message:@"Collapsed acction succeded."
+                                                                                         delegate:nil
+                                                                                cancelButtonTitle:@"OK"
+                                                                                otherButtonTitles:nil] show];
+                                                          }
+                                                      }];
+    }
 }
 @end

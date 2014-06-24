@@ -8,6 +8,7 @@
 
 #import "TrAdImageCollectionViewDelegate.h"
 #import "TrAdImageCollectionView.h"
+#import "TrAdPinterestPictures.h"
 
 @implementation TrAdImageCollectionViewDelegate
 
@@ -48,12 +49,13 @@
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = [indexPath row];
-    assert(!(index>999) && @"row can not be bigger than 999");
-    NSString * prefix = (index < 10)?@"00":(index < 100)?@"0":@"";
-    NSString * name = [NSString stringWithFormat:@"%@%ld.jpg", prefix, index];
-    UIImage * image = [UIImage imageNamed:name];
-    CGSize size = CGSizeMake([TrAdImageCollectionView cellWidth], [TrAdImageCollectionView cellWidth]/[image size].width*[image size].height );
+    NSArray * images = [[TrAdPinterestPictures sharedInstance] imagesAtIndex:[indexPath indexAtPosition:1]];
+    UIImage * image = [images lastObject];
+    if ([images count] > 1) {
+        image = [[TrAdPinterestPictures sharedInstance] tileFashionImage:images];
+    }
+    
+    CGSize size = [TrAdImageCollectionView normalizedSize:image];
     
     return size;
 }

@@ -17,6 +17,8 @@
  */
 - (NSUInteger)imagesGroupsCount;
 - (NSArray*)imagesAtIndex:(NSUInteger)idx;
-- (void)collapaseFrom:(NSIndexPath*)idxFrom to:(NSIndexPath*)idxTo success:(IdBoolBlock)succes;
+- (void)collapaseFrom:(NSUInteger)idxFrom to:(NSUInteger)idxTo success:(IdBoolBlock)succes;
+
+- (UIImage*)tileFashionImage:(NSArray*)images;
 
 @end

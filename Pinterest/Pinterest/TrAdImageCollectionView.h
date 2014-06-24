@@ -12,7 +12,6 @@
 
 + (CGFloat)cellWidth;
 + (CGFloat)minimumSpacing;
-
-- (void)collapseFrom:(NSIndexPath*)cellFrom to:(NSIndexPath*)cellTo;
++ (CGSize)normalizedSize:(UIImage*)image;
 
 @end

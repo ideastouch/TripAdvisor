@@ -20,6 +20,11 @@
     return 1;
 }
 
++ (CGSize)normalizedSize:(UIImage*)image
+{
+    return CGSizeMake([TrAdImageCollectionView cellWidth], [TrAdImageCollectionView cellWidth]/[image size].width*[image size].height );
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -37,10 +42,5 @@
     // Drawing code
 }
 */
-
-- (void)collapseFrom:(NSIndexPath*)cellFrom to:(NSIndexPath*)cellTo
-{
-    
-}
 
 @end

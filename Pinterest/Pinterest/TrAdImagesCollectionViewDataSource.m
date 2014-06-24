@@ -9,6 +9,8 @@
 #import "TrAdImagesCollectionViewDataSource.h"
 #import "TrAdImageCollectionViewCell.h"
 #import "TrAdImageCollectionView.h"
+#import "TrAdPinterestPictures.h"
+#import "TrAdPinterestPictures.h"
 
 @interface TrAdImagesCollectionViewDataSource ()
 
@@ -31,23 +33,24 @@
 #pragma mark required
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 18;
+    return [[TrAdPinterestPictures sharedInstance] imagesGroupsCount];
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = [indexPath row];
-    assert(!(index>999) && @"row can not be bigger than 999");
-    NSString * prefix = (index < 10)?@"00":(index < 100)?@"0":@"";
-    NSString * name = [NSString stringWithFormat:@"%@%ld.jpg", prefix, index];
-    UIImage * image = [UIImage imageNamed:name];
+    NSArray * images = [[TrAdPinterestPictures sharedInstance] imagesAtIndex:[indexPath indexAtPosition:1]];
+    UIImage * image = [images lastObject];
+    if ([images count] > 1) {
+        image = [[TrAdPinterestPictures sharedInstance] tileFashionImage:images];
+    }
     id collectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:_identifier
                                                                       forIndexPath:indexPath];
     
     CGPoint origin = [collectionViewCell frame].origin;
-    CGRect rect = CGRectMake(origin.x, origin.y,
-                             [TrAdImageCollectionView cellWidth], [TrAdImageCollectionView cellWidth]/[image size].width*[image size].height );
+    CGSize size = [TrAdImageCollectionView normalizedSize:image];
+    CGRect rect = CGRectMake(origin.x, origin.y, size.width, size.height);
+    
     [collectionViewCell setFrame:rect];
     [[collectionViewCell imageView] setImage:image];
     

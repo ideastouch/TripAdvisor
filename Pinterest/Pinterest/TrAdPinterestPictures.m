@@ -7,6 +7,7 @@
 //
 
 #import "TrAdPinterestPictures.h"
+#import "TrAdImageCollectionView.h"
 
 NSInteger const picturesCount = 18;
 
@@ -52,7 +53,7 @@ NSInteger const picturesCount = 18;
 
 - (NSArray*)imagesAtIndex:(NSUInteger)idx
 {
-    if (   [_imagesGroups objectAtIndex:idx] == nil
+    if (   [_imagesGroups count] <= idx
         && [_images count] < picturesCount) {
         NSString * prefix = ([_images count] < 10)?@"00":@"0";
         NSString * name = [NSString stringWithFormat:@"%@%ld.jpg", prefix, [_images count]];
@@ -64,10 +65,10 @@ NSInteger const picturesCount = 18;
     return [_imagesGroups objectAtIndex:idx];
 }
 
-- (void)collapaseFrom:(NSIndexPath*)idxFrom to:(NSIndexPath*)idxTo success:(IdBoolBlock)succes
+- (void)collapaseFrom:(NSUInteger)idxFrom to:(NSUInteger)idxTo success:(IdBoolBlock)succes
 {
-    NSUInteger from = MIN(idxFrom.row, idxTo.row);
-    NSUInteger to = MAX(idxFrom.row, idxTo.row);
+    NSUInteger from = MIN(idxFrom, idxTo);
+    NSUInteger to = MAX(idxFrom, idxTo);
     __block NSMutableArray * collapsed = [NSMutableArray array];
     __block BOOL error = NO;
     NSRange subarrayRange = NSMakeRange(from, to - from);
@@ -85,6 +86,40 @@ NSInteger const picturesCount = 18;
         [_imagesGroups insertObject:collapsed atIndex:from];
     }
     succes(collapsed, error);
+}
+
+- (UIImage*)tileFashionImage:(NSArray*)images
+{
+    __block CGSize smallerSize = [TrAdImageCollectionView normalizedSize:[images objectAtIndex:0]];
+    __block CGSize biggerSize = [TrAdImageCollectionView normalizedSize:[images objectAtIndex:0]];
+    [[images subarrayWithRange:NSMakeRange(1, [images count]-1)] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        CGSize size = [TrAdImageCollectionView normalizedSize:obj];
+        smallerSize.height = MIN(smallerSize.height, size.height);
+        biggerSize.height = MAX(biggerSize.height, size.height);
+    }];
+    
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(biggerSize.width, biggerSize.height), YES, 0.0);
+    [[UIColor grayColor] setFill];
+    UIRectFill(CGRectMake(0, 0, biggerSize.width, biggerSize.height));
+    
+    CGFloat deltaWidth  = biggerSize.width  / 3 / [images count];
+    CGFloat deltaHeight = biggerSize.height / 3 / [images count];
+    
+    for (int idx = 0; idx < [images count]; idx++) {
+        UIImage * obj = [images objectAtIndex:idx];
+        CGSize size = [TrAdImageCollectionView normalizedSize:obj];
+        size.width  *= (CGFloat)2/(CGFloat)3;
+        size.height *= (CGFloat)2/(CGFloat)3;
+        CGRect rect = CGRectMake(deltaWidth*idx, deltaHeight*idx, size.width, size.height);
+        CGFloat alpha = 0.6 + 0.4 * (CGFloat)([images count]-idx)/(CGFloat)[images count];
+        [obj drawInRect:rect blendMode:kCGBlendModeNormal alpha:alpha];
+    };
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    // (6) Closing the context:
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 @end
