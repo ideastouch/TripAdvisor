@@ -137,7 +137,6 @@ NSInteger const picturesCount = 18;
         [obj drawInRect:rect blendMode:kCGBlendModeNormal alpha:alpha];
     };
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    // (6) Closing the context:
     UIGraphicsEndImageContext();
     
     return image;

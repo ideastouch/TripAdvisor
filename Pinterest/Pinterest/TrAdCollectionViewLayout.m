@@ -14,7 +14,6 @@
 
 @property CGSize contentSize;
 @property (nonatomic, strong) NSMutableArray * attributesArray;
-@property (nonatomic, strong) NSMutableDictionary * collectionViewLayoutAttributes;
 
 @end
 
@@ -26,10 +25,7 @@
     self = [super init];
     if (self) {
         self.contentSize = CGSizeZero;
-//        self.minimumLineSpacing = [TrAdImageCollectionView minimumSpacing];
-//        self.minimumInteritemSpacing = [TrAdImageCollectionView minimumSpacing];
         self.attributesArray = [NSMutableArray array];
-        self.collectionViewLayoutAttributes = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -39,10 +35,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.contentSize = CGSizeZero;
-//        self.minimumLineSpacing = [TrAdImageCollectionView minimumSpacing];
-        //        self.minimumInteritemSpacing = [TrAdImageCollectionView minimumSpacing];
         self.attributesArray = [NSMutableArray array];
-        self.collectionViewLayoutAttributes = [NSMutableDictionary dictionary];
     }
     return self;
 }
