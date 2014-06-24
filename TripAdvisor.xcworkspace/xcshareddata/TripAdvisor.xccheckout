@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ADC65A76-01E6-410E-966F-1626B9684C0C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TripAdvisor</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8B359AC4-49D3-430E-B77F-031A73EBEAB5</key>
+		<string>https://github.com/ideastouch/TripAdvisor.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TripAdvisor.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8B359AC4-49D3-430E-B77F-031A73EBEAB5</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ideastouch/TripAdvisor.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8B359AC4-49D3-430E-B77F-031A73EBEAB5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8B359AC4-49D3-430E-B77F-031A73EBEAB5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TripAdvisor</string>
+		</dict>
+	</array>
+</dict>
+</plist>

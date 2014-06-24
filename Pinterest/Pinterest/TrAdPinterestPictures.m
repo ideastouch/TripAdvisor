@@ -117,19 +117,23 @@ NSInteger const picturesCount = 18;
     
     
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(biggerSize.width, biggerSize.height), YES, 0.0);
-    [[UIColor grayColor] setFill];
+    [[UIColor whiteColor] setFill];
     UIRectFill(CGRectMake(0, 0, biggerSize.width, biggerSize.height));
+    [[UIColor blackColor] setFill];
+    UIRectFill(CGRectMake(1, 1, biggerSize.width-2, biggerSize.height-2));
+    [[UIColor whiteColor] setFill];
+    UIRectFill(CGRectMake(3, 3, biggerSize.width-6, biggerSize.height-6));
     
-    CGFloat deltaWidth  = biggerSize.width  / 3 / [images count];
-    CGFloat deltaHeight = biggerSize.height / 3 / [images count];
+    CGFloat deltaWidth  = (biggerSize.width-6)  / 3 / [images count];
+    CGFloat deltaHeight = (biggerSize.height-6) / 3 / [images count];
     
     for (int idx = 0; idx < [images count]; idx++) {
         UIImage * obj = [images objectAtIndex:idx];
         CGSize size = [TrAdImageCollectionView normalizedSize:obj];
         size.width  *= (CGFloat)2/(CGFloat)3;
         size.height *= (CGFloat)2/(CGFloat)3;
-        CGRect rect = CGRectMake(deltaWidth*idx, deltaHeight*idx, size.width, size.height);
-        CGFloat alpha = 0.6 + 0.4 * (CGFloat)([images count]-idx)/(CGFloat)[images count];
+        CGRect rect = CGRectMake(deltaWidth*idx+6, deltaHeight*idx+6, size.width, size.height);
+        CGFloat alpha = 0.75 + 0.25 * (CGFloat)([images count]-idx)/(CGFloat)[images count];
         [obj drawInRect:rect blendMode:kCGBlendModeNormal alpha:alpha];
     };
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
