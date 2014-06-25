@@ -21,6 +21,9 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
 @property (strong, nonatomic) IBOutlet TrAdImagesCollectionViewDataSource * imagesCollectionViewDataSource;
 @property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchGestureRecognizer;
 - (IBAction)handleGesture:(UIGestureRecognizer *)gestureRecognizer;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognition;
+- (IBAction)tapGestureRecognitionAction:(id)sender;
+
 
 @end
 
@@ -68,24 +71,12 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
         NSUInteger idxTo   = [getIndexPath(1) indexAtPosition:1];
         
         if (idxFrom == idxTo) {
-            [[TrAdPinterestPictures sharedInstance] uncollapaseAtPosition:idxFrom
-                                                                  success:^(id<NSObject> uncollapsedImages, BOOL fail) {
-                                                                      if (fail) {
-                                                                          [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
-                                                                                                      message:@"Uncollapsed acction fail."
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:@"OK"
-                                                                                            otherButtonTitles:nil] show];
-                                                                      }
-                                                                      else {
-                                                                          [_collectionView reloadData];
-                                                                          [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
-                                                                                                      message:@"Uncollapsed acction succeded."
-                                                                                                     delegate:nil
-                                                                                            cancelButtonTitle:@"OK"
-                                                                                            otherButtonTitles:nil] show];
-                                                                      }
-                                                                  }];
+            
+            [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
+                                        message:@"Uncollapsed acction fail. Please selecte two differente pictures"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
         }
         else {
             [[TrAdPinterestPictures sharedInstance] collapaseFrom:idxFrom
@@ -93,7 +84,7 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
                                                           success:^(id<NSObject> collapsedImages, BOOL fail) {
                                                               if (fail) {
                                                                   [[[UIAlertView alloc] initWithTitle:@"Collapsion action"
-                                                                                              message:@"Collapsed acction fail."
+                                                                                              message:@"Collapsed acction fail. Please select a portion without pictures collapsed already."
                                                                                              delegate:nil
                                                                                     cancelButtonTitle:@"OK"
                                                                                     otherButtonTitles:nil] show];
@@ -108,6 +99,32 @@ NSString * const TrAdViewControllerCellIdntifier = @"TrAdViewControllerCellIdnti
                                                               }
                                                           }];
         }
+    }
+}
+- (IBAction)tapGestureRecognitionAction:(UIGestureRecognizer *)tapGestureRecognizer {
+    if (tapGestureRecognizer.numberOfTouches == 1) {
+        CGPoint location = [tapGestureRecognizer locationOfTouch:0 inView:[tapGestureRecognizer view]];
+        CGRect rect = CGRectMake(location.x - 1, location.y - 1, location.x + 1, location.y + 1);
+        NSArray * layoutAttributes = [[_collectionView collectionViewLayout] layoutAttributesForElementsInRect:rect];
+        NSIndexPath * indexPath = [[layoutAttributes objectAtIndex:0] indexPath];
+        [[TrAdPinterestPictures sharedInstance] uncollapaseAtPosition:[indexPath indexAtPosition:1]
+                                                              success:^(id<NSObject> uncollapsedImages, BOOL fail) {
+                                                                  if (fail) {
+                                                                      [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
+                                                                                                  message:@"Uncollapsed acction fail. Please select a cell with pictures collapsed already."
+                                                                                                 delegate:nil
+                                                                                        cancelButtonTitle:@"OK"
+                                                                                        otherButtonTitles:nil] show];
+                                                                  }
+                                                                  else {
+                                                                      [_collectionView reloadData];
+                                                                      [[[UIAlertView alloc] initWithTitle:@"Uncollapsion action"
+                                                                                                  message:@"Uncollapsed acction succeded."
+                                                                                                 delegate:nil
+                                                                                        cancelButtonTitle:@"OK"
+                                                                                        otherButtonTitles:nil] show];
+                                                                  }
+                                                              }];
     }
 }
 @end

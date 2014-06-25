@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pinterest/Pinterest/TrAdViewController.m"
-            timestampString = "425329143.307653"
+            timestampString = "425400764.719844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "-handleGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pinterest/Pinterest/TrAdViewController.m"
-            timestampString = "425329148.45826"
+            timestampString = "425400764.719844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "-handleGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,6 +122,22 @@
             startingLineNumber = "92"
             endingLineNumber = "92"
             landmarkName = "-collapaseFrom:to:success:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pinterest/Pinterest/TrAdViewController.m"
+            timestampString = "425400764.719844"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-tapGestureRecognitionAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

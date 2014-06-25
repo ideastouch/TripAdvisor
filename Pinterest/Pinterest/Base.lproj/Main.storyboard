@@ -50,6 +50,7 @@
                                 </cells>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fO2-OV-m37" appends="YES" id="rNe-1k-O5f"/>
+                                    <outletCollection property="gestureRecognizers" destination="lQl-8I-pSy" appends="YES" id="1oa-dW-kdb"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -58,6 +59,7 @@
                     <connections>
                         <outlet property="collectionView" destination="CBu-8J-6DV" id="TTz-Wh-bPb"/>
                         <outlet property="pinchGestureRecognizer" destination="fO2-OV-m37" id="XCC-Lq-M7A"/>
+                        <outlet property="tapGestureRecognition" destination="lQl-8I-pSy" id="IkV-9N-Cv6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -66,6 +68,11 @@
                         <action selector="handleGesture:" destination="BYZ-38-t0r" id="165-1O-sL6"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="lQl-8I-pSy">
+                    <connections>
+                        <action selector="tapGestureRecognitionAction:" destination="BYZ-38-t0r" id="WvP-v3-yyD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
         </scene>
     </scenes>
